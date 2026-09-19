@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct HackingWithSwift_HighRollersApp: App {
@@ -13,5 +14,6 @@ struct HackingWithSwift_HighRollersApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Dice.self)
     }
 }
