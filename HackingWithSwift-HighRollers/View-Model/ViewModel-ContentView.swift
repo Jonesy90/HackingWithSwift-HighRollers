@@ -24,8 +24,13 @@ extension ContentView {
         
         var currentResult = DiceResult(type: 0, number: 0)
         
-        func rollDice() {
-            stoppedDice = -20
+        func rollDice(voiceOverEnabled: Bool) {
+            if voiceOverEnabled {
+                stoppedDice = numberOfRoll
+            } else {
+                stoppedDice = -20
+            }
+            
             currentResult = DiceResult(type: selectedDiceTypes, number: numberOfRoll)
         }
         
