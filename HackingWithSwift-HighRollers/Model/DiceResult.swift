@@ -15,6 +15,10 @@ class DiceResult {
     var number: Int
     var rolls = [Int]()
     
+    var description: String {
+        rolls.map(String.init).joined(separator: ", ")
+    }
+    
     init(type: Int, number: Int) {
         self.type = type
         self.number = number
