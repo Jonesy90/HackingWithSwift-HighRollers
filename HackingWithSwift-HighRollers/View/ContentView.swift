@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.accessibilityVoiceOverEnabled) var accessibilityVoiceOverEnabled
+    
     @Environment(\.modelContext) var modelContext
     @Query var savedResults: [DiceResult]
     
@@ -28,7 +30,9 @@ struct ContentView: View {
                     
                     Stepper("Number of dice: \(viewModel.numberOfRoll)", value: $viewModel.numberOfRoll, in: 1...20)
                     
-                    Button("Roll Dice", action: viewModel.rollDice)
+                    Button("Roll Dice") {
+                        viewModel.rollDice(voiceOverEnabled: accessibilityVoiceOverEnabled)
+                    }
                 } footer: {
                     LazyVGrid(columns: viewModel.columns) {
                         ForEach(0..<viewModel.currentResult.rolls.count, id: \.self) { rollNumber in
@@ -43,6 +47,8 @@ struct ContentView: View {
                                 .padding(5)
                         }
                     }
+                    .accessibilityElement()
+                    .accessibilityLabel("Latest roll: \(viewModel.currentResult.description)")
                 }
                 .disabled(viewModel.stoppedDice < viewModel.currentResult.rolls.count)
                 
@@ -52,8 +58,10 @@ struct ContentView: View {
                             VStack(alignment: .leading) {
                                 Text("\(result.number) x \(result.type)")
                                     .font(.headline)
-                                Text(result.rolls.map(String.init).joined(separator: ", "))
+                                Text(result.description)
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel("\(result.number) D\(result.type), \(result.description)")
                         }
                     }
                 }
