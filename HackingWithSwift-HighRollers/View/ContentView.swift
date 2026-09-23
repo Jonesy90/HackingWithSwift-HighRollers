@@ -48,12 +48,14 @@ struct ContentView: View {
                         }
                     }
                     .accessibilityElement()
-                    .accessibilityLabel("Latest roll: \(viewModel.currentResult.description)")
+                    .accessibilityLabel("Latest roll: \(viewModel.currentResult.description)") /// 'accessibilityLabel' reads the latest roll with assitive technologies.
                 }
                 .disabled(viewModel.stoppedDice < viewModel.currentResult.rolls.count)
                 
+                /// Only shows if 'savedResults' is not empty.
                 if savedResults.isEmpty == false {
                     Section("Saved Results") {
+                        /// Each result in 'savedResult' is shown within the dice formula and description.
                         ForEach(savedResults) { result in
                             VStack(alignment: .leading) {
                                 Text("\(result.number) x \(result.type)")
@@ -61,7 +63,7 @@ struct ContentView: View {
                                 Text(result.description)
                             }
                             .accessibilityElement()
-                            .accessibilityLabel("\(result.number) D\(result.type), \(result.description)")
+                            .accessibilityLabel("\(result.number) D\(result.type), \(result.description)") /// 'accessibilityLabel' reads the result with assitive technologies.
                         }
                     }
                 }
