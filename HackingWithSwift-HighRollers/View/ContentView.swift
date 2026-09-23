@@ -70,6 +70,7 @@ struct ContentView: View {
             }
             .navigationTitle("High Rollers")
         }
+        /// Runs the updateDice function when the timer changes.
         .onReceive(viewModel.timer) { _ in
             viewModel.updateDice(modelContext: modelContext)
         }
