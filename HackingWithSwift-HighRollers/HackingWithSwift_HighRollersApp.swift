@@ -14,6 +14,6 @@ struct HackingWithSwift_HighRollersApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Dice.self)
+        .modelContainer(for: DiceResult.self)
     }
 }
