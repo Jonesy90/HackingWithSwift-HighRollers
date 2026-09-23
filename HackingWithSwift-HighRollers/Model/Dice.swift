@@ -9,13 +9,20 @@ import Foundation
 import SwiftData
 
 @Model
-class Dice {
+class Dice: Identifiable {
     var id = UUID()
+    var sessionID: UUID
+    var timeStamp = Date.now
     var numberOfSides: Int
     var randomNumber: Int
     
-    init(numberOfSides: Int) {
+    init(numberOfSides: Int, sessionID: UUID) {
         self.numberOfSides = numberOfSides
-        self.randomNumber = Int.random(in: 0..<numberOfSides)
+        self.randomNumber = Int.random(in: 1..<numberOfSides + 1)
+        self.sessionID = sessionID
+    }
+    
+    convenience init(numberOfSides: Int) {
+        self.init(numberOfSides: numberOfSides, sessionID: UUID())
     }
 }
